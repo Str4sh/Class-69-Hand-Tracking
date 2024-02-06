@@ -24,14 +24,11 @@ while True:
             lmList=hand1['lmList']
             handType1=hand1["type"]
 
-            hand2=hands[1]
-            lmList2=hand2['lmList']
-            handType2=hand2["type"]
+            
             
             # print(handType1)
             #identifying the fingers
             fingers1=detector.fingersUp(hand1)
-            fingers2=detector.fingersUp(hand2)
             # print(fingers1)
             currentFingersUp=''
 
@@ -47,9 +44,14 @@ while True:
                 currentFingersUp="Pinky"
             else:
                 currentFingersUp=""
-            cv2.putText(cameraFeedImg_flipped, handType1+":"+currentFingersUp,(50,50),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,0.6,(0,0,255),2)
+            cv2.putText(cameraFeedImg_flipped, handType1+":"+currentFingersUp,(50,50),cv2.FONT_HERSHEY_SIMPLEX,0.6,(0,0,255),2)
 
-            currentFingersUp2=''
+            hand2=hands[1]
+            lmList2=hand2['lmList']
+            handType2=hand2["type"]
+            fingers2=detector.fingersUp(hand2)
+
+            currentFingersUp2=""
 
             if fingers2[0] == 1:
                 currentFingersUp2="Thumb"
@@ -63,17 +65,9 @@ while True:
                 currentFingersUp2="Pinky"
             else:
                 currentFingersUp2=""
-            cv2.putText(cameraFeedImg_flipped, handType2+":"+currentFingersUp2,(50,50),cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,0.6,(0,0,255),2)
+            cv2.putText(cameraFeedImg_flipped, handType2+":"+currentFingersUp2,(50,100),cv2.FONT_HERSHEY_SIMPLEX,0.6,(0,0,255),2)
 
-            if handType1 == "Left":
-                cameraFeedImg_flipped=cv2.cvtColor(cameraFeedImg_flipped,cv2.COLOR_BGR2GRAY)
-            if handType1 == "Right":
-                cameraFeedImg_flipped=cv2.xphoto.OilPainting(cameraFeedImg_flipped,size=7,dynRatio=1)
-            if handType2 == "Left":
-                cameraFeedImg_flipped=cv2.cvtColor(cameraFeedImg_flipped,cv2.COLOR_BGR2GRAY)
-            if handType2 == "Right":
-                cameraFeedImg_flipped=cv2.xphoto.OilPainting(cameraFeedImg_flipped,size=7,dynRatio=1)             
-
+            
     except Exception as e:
         print(e)
 
